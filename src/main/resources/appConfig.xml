@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="memberService" class="hello.core.member.MemberServiceImpl">
+        <constructor-arg name="memberRepository" ref="memberRepository" /><!--멤버 리포지토리를 넘겨줌-->
+    </bean>
+    <bean id="memberRepository"
+          class="hello.core.member.MemoryMemberRepository" /><!--멤버 리포지토리 등록-->
+    <bean id="orderService" class="hello.core.order.OrderServiceImpl">
+        <constructor-arg name="memberRepository" ref="memberRepository" /><!--멤버 리포지토리 등록-->
+        <constructor-arg name="discountPolicy" ref="discountPolicy" /><!--디스카운스폴리시 등록-->
+    </bean><!--그냥 한 서비스에 구현체를 등록해주는 거임-->
+    <bean id="discountPolicy" class="hello.core.discount.RateDiscountPolicy" /><!--디스카운트폴리시 등록-->
+
+</beans>
